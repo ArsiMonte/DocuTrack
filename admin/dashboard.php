@@ -1,6 +1,6 @@
 <?php
-// admin/dashboard.php - Registrar Administration Dashboard
-$pageTitle = "Admin Dashboard";
+// admin/dashboard.php — Registrar Administration Dashboard
+$pageTitle = "Registrar Dashboard";
 require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/../includes/auth.php';
 
@@ -33,69 +33,78 @@ $recentRequests = $recentStmt->fetchAll();
 require_once __DIR__ . '/../includes/header.php';
 ?>
 
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
     <div>
-        <h1 style="font-size: 1.75rem; color: var(--dark); font-weight: 700;">Registrar Admin Dashboard</h1>
-        <p style="color: var(--muted); font-size: 0.9rem;">Overview of student document requests, verification queue, and releases.</p>
+        <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--gold-dark); font-weight: 700;">Office of the Registrar</span>
+        <h1 style="font-family: var(--font-serif); font-size: 2.1rem; color: var(--burgundy-dark); font-weight: 700; margin-top: 0.15rem;">
+            Administrative Overview
+        </h1>
+        <p style="color: var(--muted); font-size: 0.925rem;">
+            Real-time queue monitoring, verification backlog, and credential release management.
+        </p>
     </div>
-    <div style="display: flex; gap: 0.5rem;">
-        <a href="/DocuTrack/admin/requests.php" class="btn btn-primary btn-sm">
-            <i class="fa-solid fa-file-invoice"></i> Manage All Requests
+    <div style="display: flex; gap: 0.65rem;">
+        <a href="/DocuTrack/admin/requests.php" class="btn btn-gold btn-sm">
+            <i class="fa-solid fa-list-check"></i> Manage All Requests
         </a>
         <a href="/DocuTrack/admin/documents.php" class="btn btn-secondary btn-sm">
-            <i class="fa-solid fa-folder-gear"></i> Document Catalog
+            <i class="fa-solid fa-layer-group"></i> Document Offerings
         </a>
     </div>
 </div>
 
-<!-- Metrics Overview -->
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
-    <div class="card" style="padding: 1.25rem;">
-        <div style="font-size: 0.8rem; color: var(--muted); font-weight: 600; text-transform: uppercase;">Total Requests</div>
-        <div style="font-size: 1.85rem; font-weight: 700; color: var(--dark);"><?= (int)($stats['total'] ?? 0) ?></div>
+<!-- Metrics Overview Cards with Luxury Trims -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.25rem; margin-bottom: 2.25rem;">
+    <div class="card" style="padding: 1.4rem; border-top: 3.5px solid var(--burgundy-dark);">
+        <div style="font-size: 0.72rem; color: var(--gold-dark); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Total Requests</div>
+        <div style="font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; color: var(--burgundy-dark);"><?= (int)($stats['total'] ?? 0) ?></div>
     </div>
-    <div class="card" style="padding: 1.25rem; border-left: 4px solid #f59e0b;">
-        <div style="font-size: 0.8rem; color: #b45309; font-weight: 600; text-transform: uppercase;">Pending</div>
-        <div style="font-size: 1.85rem; font-weight: 700; color: #b45309;"><?= (int)($stats['pending'] ?? 0) ?></div>
+    <div class="card" style="padding: 1.4rem; border-top: 3.5px solid var(--gold-bright);">
+        <div style="font-size: 0.72rem; color: #92690a; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Pending</div>
+        <div style="font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; color: #92690a;"><?= (int)($stats['pending'] ?? 0) ?></div>
     </div>
-    <div class="card" style="padding: 1.25rem; border-left: 4px solid #6366f1;">
-        <div style="font-size: 0.8rem; color: #4338ca; font-weight: 600; text-transform: uppercase;">Verification</div>
-        <div style="font-size: 1.85rem; font-weight: 700; color: #4338ca;"><?= (int)($stats['verification'] ?? 0) ?></div>
+    <div class="card" style="padding: 1.4rem; border-top: 3.5px solid #7b2c5e;">
+        <div style="font-size: 0.72rem; color: #7b2c5e; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Verification</div>
+        <div style="font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; color: #7b2c5e;"><?= (int)($stats['verification'] ?? 0) ?></div>
     </div>
-    <div class="card" style="padding: 1.25rem; border-left: 4px solid var(--info);">
-        <div style="font-size: 0.8rem; color: var(--info); font-weight: 600; text-transform: uppercase;">Processing</div>
-        <div style="font-size: 1.85rem; font-weight: 700; color: var(--info);"><?= (int)($stats['processing'] ?? 0) ?></div>
+    <div class="card" style="padding: 1.4rem; border-top: 3.5px solid var(--burgundy-primary);">
+        <div style="font-size: 0.72rem; color: var(--burgundy-rich); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Processing</div>
+        <div style="font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; color: var(--burgundy-rich);"><?= (int)($stats['processing'] ?? 0) ?></div>
     </div>
-    <div class="card" style="padding: 1.25rem; border-left: 4px solid var(--success);">
-        <div style="font-size: 0.8rem; color: var(--success); font-weight: 600; text-transform: uppercase;">Ready for Pickup</div>
-        <div style="font-size: 1.85rem; font-weight: 700; color: var(--success);"><?= (int)($stats['ready'] ?? 0) ?></div>
+    <div class="card" style="padding: 1.4rem; border-top: 3.5px solid #166534;">
+        <div style="font-size: 0.72rem; color: #166534; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Ready for Pickup</div>
+        <div style="font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; color: #166534;"><?= (int)($stats['ready'] ?? 0) ?></div>
     </div>
-    <div class="card" style="padding: 1.25rem; border-left: 4px solid var(--muted);">
-        <div style="font-size: 0.8rem; color: var(--muted); font-weight: 600; text-transform: uppercase;">Released</div>
-        <div style="font-size: 1.85rem; font-weight: 700; color: var(--muted);"><?= (int)($stats['released'] ?? 0) ?></div>
+    <div class="card" style="padding: 1.4rem; border-top: 3.5px solid #4b5563;">
+        <div style="font-size: 0.72rem; color: #4b5563; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Released</div>
+        <div style="font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; color: #4b5563;"><?= (int)($stats['released'] ?? 0) ?></div>
     </div>
 </div>
 
-<!-- Recent Requests -->
+<!-- Recent Submissions Table -->
 <div class="card">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
-        <h3 class="card-title" style="margin-bottom: 0;"><i class="fa-solid fa-clock-rotate-left"></i> Recent Submissions</h3>
-        <a href="/DocuTrack/admin/requests.php" style="font-size: 0.875rem; color: var(--primary); font-weight: 600; text-decoration: none;">View All &rarr;</a>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.35rem;">
+        <h3 class="card-title" style="margin-bottom: 0;">
+            <i class="fa-solid fa-clock-rotate-left"></i> Recent Applications Queue
+        </h3>
+        <a href="/DocuTrack/admin/requests.php" style="font-size: 0.88rem; color: var(--burgundy-primary); font-weight: 700; text-decoration: none;">
+            View All Requests &rarr;
+        </a>
     </div>
 
     <?php if (empty($recentRequests)): ?>
-        <p style="color: var(--muted); font-size: 0.9rem;">No requests logged in the system yet.</p>
+        <p style="color: var(--muted); font-size: 0.9rem; text-align: center; padding: 2.5rem 0;">No requests recorded in the system.</p>
     <?php else: ?>
         <div class="table-responsive">
             <table class="table">
                 <thead>
                     <tr>
                         <th>Tracking Reference</th>
-                        <th>Student</th>
+                        <th>Student Name & ID</th>
                         <th>Document</th>
                         <th>Amount</th>
                         <th>Status</th>
-                        <th>Date</th>
+                        <th>Filing Date</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -111,14 +120,17 @@ require_once __DIR__ . '/../includes/header.php';
                         ?>
                         <tr>
                             <td>
-                                <strong style="color: var(--primary); font-family: monospace;"><?= htmlspecialchars($r['tracking_code']) ?></strong>
+                                <strong style="color: var(--burgundy-primary); font-family: monospace; letter-spacing: 0.5px;"><?= htmlspecialchars($r['tracking_code']) ?></strong>
                             </td>
                             <td>
-                                <div><strong><?= htmlspecialchars($r['student_name']) ?></strong></div>
-                                <div style="font-size: 0.78rem; color: var(--muted);"><?= htmlspecialchars($r['student_id'] ?? '') ?></div>
+                                <div style="font-weight: 700; color: var(--dark);"><?= htmlspecialchars($r['student_name']) ?></div>
+                                <div style="font-size: 0.78rem; color: var(--muted);"><?= htmlspecialchars($r['student_id'] ?? 'N/A') ?></div>
                             </td>
-                            <td><?= htmlspecialchars($r['document_name']) ?> (<?= $r['copies'] ?>)</td>
-                            <td>₱<?= number_format($r['total_amount'], 2) ?></td>
+                            <td>
+                                <strong style="font-family: var(--font-serif);"><?= htmlspecialchars($r['document_name']) ?></strong>
+                                <span style="font-size: 0.8rem; color: var(--muted);">(<?= $r['copies'] ?>x)</span>
+                            </td>
+                            <td><strong>₱<?= number_format($r['total_amount'], 2) ?></strong></td>
                             <td><span class="badge <?= $statusBadge ?>"><?= htmlspecialchars($r['status']) ?></span></td>
                             <td><?= date('M d, Y', strtotime($r['created_at'])) ?></td>
                             <td>

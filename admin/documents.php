@@ -1,5 +1,5 @@
 <?php
-// admin/documents.php - Manage Document Types Catalog
+// admin/documents.php — Manage Document Catalog
 $pageTitle = "Document Catalog";
 require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/../includes/auth.php';
@@ -8,7 +8,7 @@ requireAdmin();
 $message = '';
 $error = '';
 
-// Add / Edit handling
+// Add / Toggle handling
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? '';
     $name   = trim($_POST['name'] ?? '');
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             try {
                 $ins = $pdo->prepare("INSERT INTO document_types (name, description, price, processing_days, requirements) VALUES (?, ?, ?, ?, ?)");
                 $ins->execute([$name, $desc, $price, $days, $reqs]);
-                $message = "Document type added successfully.";
+                $message = "Document offering added to official catalog.";
             } catch (PDOException $e) {
                 $error = "Failed to add document: " . $e->getMessage();
             }
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id = (int)($_POST['id'] ?? 0);
         $toggleStmt = $pdo->prepare("UPDATE document_types SET is_active = IF(is_active=1, 0, 1) WHERE id = ?");
         $toggleStmt->execute([$id]);
-        $message = "Document status updated.";
+        $message = "Document availability status updated.";
     }
 }
 
@@ -43,78 +43,85 @@ $docs = $pdo->query("SELECT * FROM document_types ORDER BY id ASC")->fetchAll();
 require_once __DIR__ . '/../includes/header.php';
 ?>
 
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
     <div>
-        <h1 style="font-size: 1.75rem; color: var(--dark); font-weight: 700;">Document Catalog Management</h1>
-        <p style="color: var(--muted); font-size: 0.9rem;">Configure available certificates, official records, fees, and processing lead times.</p>
+        <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--gold-dark); font-weight: 700;">Catalog Management</span>
+        <h1 style="font-family: var(--font-serif); font-size: 2.1rem; color: var(--burgundy-dark); font-weight: 700; margin-top: 0.15rem;">
+            Official Document Offerings
+        </h1>
+        <p style="color: var(--muted); font-size: 0.925rem;">Configure certificate titles, official fees, expected processing lead times, and attached prerequisites.</p>
     </div>
     <div>
         <a href="/DocuTrack/admin/dashboard.php" class="btn btn-secondary btn-sm">
-            <i class="fa-solid fa-arrow-left"></i> Dashboard
+            <i class="fa-solid fa-arrow-left"></i> Dashboard Overview
         </a>
     </div>
 </div>
 
 <?php if (!empty($message)): ?>
-    <div style="background: #ecfdf5; color: #065f46; padding: 0.85rem 1rem; border-radius: 8px; margin-bottom: 1.25rem;">
+    <div style="background: #f0fdf4; color: #166534; padding: 0.9rem 1.1rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 3px solid #22c55e;">
         <i class="fa-solid fa-circle-check"></i> <?= htmlspecialchars($message) ?>
     </div>
 <?php endif; ?>
 
 <?php if (!empty($error)): ?>
-    <div style="background: #fee2e2; color: #991b1b; padding: 0.85rem 1rem; border-radius: 8px; margin-bottom: 1.25rem;">
-        <i class="fa-solid fa-triangle-exclamation"></i> <?= htmlspecialchars($error) ?>
+    <div style="background: #fdf2f2; color: #991b1b; padding: 0.9rem 1.1rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 3px solid #ef4444;">
+        <i class="fa-solid fa-circle-exclamation"></i> <?= htmlspecialchars($error) ?>
     </div>
 <?php endif; ?>
 
-<div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1.5rem; align-items: flex-start;">
-    <!-- Add Document Type Form -->
-    <div class="card">
-        <h3 class="card-title"><i class="fa-solid fa-plus-circle" style="color: var(--primary);"></i> Add Document Type</h3>
+<div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1.75rem; align-items: flex-start;">
+    <!-- Add Document Form -->
+    <div class="card" style="border-top: 4px solid var(--gold-bright);">
+        <h3 class="card-title">
+            <i class="fa-solid fa-plus-circle"></i> Add Document Type
+        </h3>
         <form action="/DocuTrack/admin/documents.php" method="POST">
             <input type="hidden" name="action" value="create">
 
             <div class="form-group">
-                <label class="form-label" for="name">Document Name *</label>
+                <label class="form-label" for="name">Official Document Title *</label>
                 <input type="text" id="name" name="name" class="form-control" placeholder="e.g. Certificate of Graduation" required>
             </div>
 
             <div class="form-group">
-                <label class="form-label" for="price">Fee (₱)</label>
+                <label class="form-label" for="price">Standard Fee (₱)</label>
                 <input type="number" step="0.50" id="price" name="price" class="form-control" value="50.00" required>
             </div>
 
             <div class="form-group">
-                <label class="form-label" for="processing_days">Estimated Turnaround (Days)</label>
+                <label class="form-label" for="processing_days">Estimated Turnaround (Working Days)</label>
                 <input type="number" id="processing_days" name="processing_days" class="form-control" value="3" min="1" required>
             </div>
 
             <div class="form-group">
-                <label class="form-label" for="requirements">Prerequisites / Requirements</label>
-                <textarea id="requirements" name="requirements" rows="2" class="form-control" placeholder="e.g. Valid ID, Clearance"></textarea>
+                <label class="form-label" for="requirements">Prerequisites / Clearances Needed</label>
+                <textarea id="requirements" name="requirements" rows="2" class="form-control" placeholder="e.g. Valid Student ID, University Clearance"></textarea>
             </div>
 
             <div class="form-group">
-                <label class="form-label" for="description">Description</label>
-                <textarea id="description" name="description" rows="2" class="form-control" placeholder="Brief description of the record"></textarea>
+                <label class="form-label" for="description">Short Description</label>
+                <textarea id="description" name="description" rows="2" class="form-control" placeholder="Institutional description"></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary" style="width: 100%;">
-                <i class="fa-solid fa-floppy-disk"></i> Save Document
+            <button type="submit" class="btn btn-gold" style="width: 100%; padding: 0.8rem;">
+                <i class="fa-solid fa-floppy-disk"></i> Save to Catalog
             </button>
         </form>
     </div>
 
     <!-- Existing Documents Table -->
     <div class="card">
-        <h3 class="card-title"><i class="fa-solid fa-list"></i> Current Offerings</h3>
+        <h3 class="card-title">
+            <i class="fa-solid fa-scroll"></i> Active Catalog Listings
+        </h3>
         <div class="table-responsive">
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Document</th>
-                        <th>Price</th>
-                        <th>Days</th>
+                        <th>Credential Title</th>
+                        <th>Standard Fee</th>
+                        <th>Lead Time</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -123,12 +130,12 @@ require_once __DIR__ . '/../includes/header.php';
                     <?php foreach ($docs as $d): ?>
                         <tr>
                             <td>
-                                <strong><?= htmlspecialchars($d['name']) ?></strong>
+                                <strong style="font-family: var(--font-serif); font-size: 1rem; color: var(--burgundy-dark);"><?= htmlspecialchars($d['name']) ?></strong>
                                 <?php if (!empty($d['requirements'])): ?>
-                                    <div style="font-size: 0.78rem; color: var(--muted);"><i class="fa-solid fa-paperclip"></i> <?= htmlspecialchars($d['requirements']) ?></div>
+                                    <div style="font-size: 0.78rem; color: var(--muted);"><i class="fa-solid fa-paperclip" style="color:var(--gold-dark);"></i> <?= htmlspecialchars($d['requirements']) ?></div>
                                 <?php endif; ?>
                             </td>
-                            <td>₱<?= number_format($d['price'], 2) ?></td>
+                            <td><strong style="color: var(--burgundy-primary);">₱<?= number_format($d['price'], 2) ?></strong></td>
                             <td><?= $d['processing_days'] ?> working days</td>
                             <td>
                                 <?php if ($d['is_active']): ?>

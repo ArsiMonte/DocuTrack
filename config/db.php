@@ -1,10 +1,13 @@
 <?php
-// config/db.php - DocuTrack Database Connection
+// config/db.php — DocuTrack Database Connection
 
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_NAME', 'docutrack_db');
+
+$pdo = null;
+$dbConnectionError = null;
 
 try {
     $pdo = new PDO(
@@ -18,6 +21,5 @@ try {
         ]
     );
 } catch (PDOException $e) {
-    // If running in development, show error details; in production, show generic message
-    die("Database Connection Error: " . htmlspecialchars($e->getMessage()));
+    $dbConnectionError = $e->getMessage();
 }

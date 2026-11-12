@@ -1,5 +1,5 @@
 <?php
-// register.php - Student Registration
+// register.php — Student Registration
 $pageTitle = "Student Registration";
 require_once __DIR__ . '/config/db.php';
 require_once __DIR__ . '/includes/auth.php';
@@ -21,18 +21,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $confirm_pass   = $_POST['confirm_password'] ?? '';
 
     if (empty($student_id) || empty($full_name) || empty($email) || empty($password)) {
-        $error = "Please fill in all mandatory fields.";
+        $error = "Please fill in all mandatory identification fields.";
     } elseif ($password !== $confirm_pass) {
-        $error = "Passwords do not match.";
+        $error = "Passwords do not match. Please re-enter.";
     } elseif (strlen($password) < 6) {
-        $error = "Password must be at least 6 characters.";
+        $error = "Security password must contain at least 6 characters.";
     } else {
         try {
-            // Check if student_id or email already exists
             $checkStmt = $pdo->prepare("SELECT id FROM users WHERE email = ? OR student_id = ? LIMIT 1");
             $checkStmt->execute([$email, $student_id]);
             if ($checkStmt->fetch()) {
-                $error = "An account with that Student ID or Email already exists.";
+                $error = "An account with that Student ID or Email is already registered.";
             } else {
                 $hashed = password_hash($password, PASSWORD_BCRYPT);
                 $ins = $pdo->prepare("
@@ -45,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit();
             }
         } catch (PDOException $e) {
-            $error = "Registration error: " . $e->getMessage();
+            $error = "Registration failure: " . $e->getMessage();
         }
     }
 }
@@ -53,55 +52,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 require_once __DIR__ . '/includes/header.php';
 ?>
 
-<div style="max-width: 560px; margin: 2rem auto;">
-    <div class="card">
-        <h2 class="card-title" style="text-align: center; margin-bottom: 0.25rem;">
-            <i class="fa-solid fa-user-plus" style="color: var(--primary);"></i> Student Registration
-        </h2>
-        <p style="text-align: center; color: var(--muted); font-size: 0.875rem; margin-bottom: 1.5rem;">
-            Create an account to request, track, and manage your school credentials online.
-        </p>
+<div style="max-width: 600px; margin: 2.5rem auto 4rem auto;">
+    <div class="card" style="box-shadow: var(--shadow-hover); border-top: 4px solid var(--gold-bright);">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+            <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--burgundy-gradient); color: var(--gold-bright); display: inline-flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 0.75rem; border: 2px solid var(--gold-bright); box-shadow: var(--gold-glow);">
+                <i class="fa-solid fa-user-graduate"></i>
+            </div>
+            <h2 class="card-title" style="justify-content: center; margin-bottom: 0.25rem;">
+                Student Account Registration
+            </h2>
+            <p style="color: var(--muted); font-size: 0.88rem;">
+                Enroll your profile to submit online applications for official registrar documents.
+            </p>
+        </div>
 
         <?php if (!empty($error)): ?>
-            <div style="background: #fee2e2; color: #991b1b; padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem; margin-bottom: 1.25rem;">
-                <i class="fa-solid fa-triangle-exclamation"></i> <?= htmlspecialchars($error) ?>
+            <div style="background: #fdf2f2; color: #991b1b; padding: 0.85rem 1rem; border-radius: 8px; font-size: 0.88rem; margin-bottom: 1.25rem; border-left: 3px solid #ef4444;">
+                <i class="fa-solid fa-circle-exclamation"></i> <?= htmlspecialchars($error) ?>
             </div>
         <?php endif; ?>
 
         <form action="/DocuTrack/register.php" method="POST">
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                 <div class="form-group">
-                    <label class="form-label" for="student_id">Student ID / LRN *</label>
+                    <label class="form-label" for="student_id">Student ID / LRN Number *</label>
                     <input type="text" id="student_id" name="student_id" class="form-control" placeholder="e.g. 2023-10045" required value="<?= htmlspecialchars($_POST['student_id'] ?? '') ?>">
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="full_name">Full Name *</label>
-                    <input type="text" id="full_name" name="full_name" class="form-control" placeholder="e.g. Juan C. Dela Cruz" required value="<?= htmlspecialchars($_POST['full_name'] ?? '') ?>">
+                    <label class="form-label" for="full_name">Complete Legal Name *</label>
+                    <input type="text" id="full_name" name="full_name" class="form-control" placeholder="e.g. Maria Santos Dela Cruz" required value="<?= htmlspecialchars($_POST['full_name'] ?? '') ?>">
                 </div>
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                 <div class="form-group">
-                    <label class="form-label" for="email">Email Address *</label>
-                    <input type="email" id="email" name="email" class="form-control" placeholder="juan@email.com" required value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
+                    <label class="form-label" for="email">Institutional / Personal Email *</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="maria@email.com" required value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="contact_number">Mobile / Contact No.</label>
+                    <label class="form-label" for="contact_number">Mobile Contact Number</label>
                     <input type="text" id="contact_number" name="contact_number" class="form-control" placeholder="09123456789" value="<?= htmlspecialchars($_POST['contact_number'] ?? '') ?>">
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="form-label" for="course_section">Course / Program & Year / Section</label>
+                <label class="form-label" for="course_section">Degree Program & Year / Section</label>
                 <input type="text" id="course_section" name="course_section" class="form-control" placeholder="e.g. BS Information Technology 3-A" value="<?= htmlspecialchars($_POST['course_section'] ?? '') ?>">
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                 <div class="form-group">
-                    <label class="form-label" for="password">Password (min 6 chars) *</label>
-                    <input type="password" id="password" name="password" class="form-control" placeholder="Create password" required>
+                    <label class="form-label" for="password">Security Password *</label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Minimum 6 characters" required>
                 </div>
 
                 <div class="form-group">
@@ -110,13 +114,13 @@ require_once __DIR__ . '/includes/header.php';
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
-                Create Account
+            <button type="submit" class="btn btn-gold" style="width: 100%; margin-top: 0.5rem; padding: 0.8rem;">
+                <i class="fa-solid fa-id-card"></i> Create Student Profile
             </button>
         </form>
 
-        <div style="margin-top: 1.5rem; text-align: center; font-size: 0.875rem; color: var(--muted); border-top: 1px solid var(--border); padding-top: 1.25rem;">
-            Already have an account? <a href="/DocuTrack/login.php" style="color: var(--primary); font-weight: 600;">Log In</a>
+        <div style="margin-top: 1.75rem; text-align: center; font-size: 0.875rem; color: var(--muted); border-top: 1px solid var(--border-subtle); padding-top: 1.25rem;">
+            Already registered? <a href="/DocuTrack/login.php" style="color: var(--burgundy-primary); font-weight: 700; text-decoration: none;">Sign In</a>
         </div>
     </div>
 </div>

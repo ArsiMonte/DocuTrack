@@ -1,205 +1,356 @@
-/* DocuTrack - Core Stylesheet */
+/* DocuTrack — Luxury Burgundy & Gold Motif */
+
 :root {
-    --primary: #1e3a8a;       /* Deep Navy */
-    --primary-hover: #1e40af;
-    --primary-light: #eff6ff;
-    --secondary: #0f766e;     /* Teal */
-    --accent: #f59e0b;        /* Amber */
-    --success: #10b981;
-    --danger: #ef4444;
-    --warning: #f59e0b;
-    --info: #0284c7;
-    --dark: #0f172a;
-    --muted: #64748b;
-    --border: #e2e8f0;
-    --bg-light: #f8fafc;
-    --white: #ffffff;
-    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-    --hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+    /* Royal Burgundy Palette */
+    --burgundy-dark: #3b0911;
+    --burgundy-primary: #5c111e;
+    --burgundy-rich: #6d1524;
+    --burgundy-light: #821c2e;
+    --burgundy-soft: #fcf6f7;
+    --burgundy-tint: rgba(92, 17, 30, 0.06);
+
+    /* Champagne & Imperial Gold Palette */
+    --gold-primary: #c59b27;
+    --gold-bright: #d4af37;
+    --gold-light: #f3e5ab;
+    --gold-champagne: #faedd0;
+    --gold-dark: #9e7817;
+    --gold-border: rgba(197, 155, 39, 0.35);
+    --gold-glow: 0 0 15px rgba(212, 175, 55, 0.3);
+    --gold-gradient: linear-gradient(135deg, #c59b27 0%, #f0da8a 50%, #b8860b 100%);
+    --gold-gradient-hover: linear-gradient(135deg, #d4af37 0%, #fdf0ba 50%, #c59b27 100%);
+    --burgundy-gradient: linear-gradient(135deg, #3d0a12 0%, #5c111e 60%, #751727 100%);
+
+    /* Typography */
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-display: 'Cinzel', serif;
+    --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+    /* Neutrals & Luxury Parchment */
+    --bg-silk: #faf7f4;
+    --bg-card: #ffffff;
+    --dark: #221316;
+    --muted: #6e5e61;
+    --border-subtle: #ebdcd2;
+    --border-gold: #e2cca0;
+
+    /* Status Colors */
+    --status-pending: #c59b27;
+    --status-verification: #7a3a60;
+    --status-processing: #5c111e;
+    --status-ready: #1b6842;
+    --status-released: #4b5563;
+    --status-rejected: #991b1b;
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -2px rgba(59, 9, 17, 0.06), 0 2px 6px -1px rgba(197, 155, 39, 0.04);
+    --shadow-card: 0 10px 30px -5px rgba(59, 9, 17, 0.08), 0 4px 10px -2px rgba(197, 155, 39, 0.06);
+    --shadow-hover: 0 20px 40px -10px rgba(59, 9, 17, 0.16), 0 6px 15px -2px rgba(212, 175, 55, 0.2);
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 body {
-    background-color: var(--bg-light);
+    background: var(--bg-silk);
+    background-image: 
+        radial-gradient(circle at 15% 15%, rgba(197, 155, 39, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(92, 17, 30, 0.04) 0%, transparent 45%);
     color: var(--dark);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.65;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    line-height: 1.6;
 }
 
-/* Header & Navigation */
+/* Regal Navbar */
 .navbar {
-    background: #ffffff;
-    border-bottom: 1px solid var(--border);
-    padding: 0.85rem 2rem;
+    background: var(--burgundy-gradient);
+    border-bottom: 2px solid var(--gold-bright);
+    box-shadow: 0 4px 25px rgba(59, 9, 17, 0.45);
+    padding: 0.9rem 2.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     position: sticky;
     top: 0;
-    z-index: 50;
+    z-index: 100;
 }
 
 .navbar-brand {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.85rem;
     text-decoration: none;
-    color: var(--primary);
+}
+
+.brand-crest {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--gold-gradient);
+    color: var(--burgundy-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    box-shadow: var(--gold-glow);
+    border: 1px solid #fff;
+}
+
+.brand-text-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-title {
+    font-family: var(--font-display);
+    font-size: 1.45rem;
     font-weight: 700;
-    font-size: 1.35rem;
-    letter-spacing: -0.5px;
+    letter-spacing: 1.5px;
+    color: #ffffff;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.brand-sub {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--gold-light);
+    font-weight: 600;
+    margin-top: -2px;
 }
 
 .brand-badge {
-    background: var(--primary);
-    color: #fff;
-    padding: 0.25rem 0.6rem;
-    border-radius: 6px;
-    font-size: 0.75rem;
-    font-weight: 600;
+    background: rgba(212, 175, 55, 0.18);
+    border: 1px solid var(--gold-bright);
+    color: var(--gold-light);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    margin-left: 0.5rem;
 }
 
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 1.25rem;
+    gap: 1.35rem;
     list-style: none;
 }
 
 .nav-links a {
+    color: #f1dfd3;
     text-decoration: none;
-    color: var(--muted);
     font-weight: 500;
-    font-size: 0.95rem;
-    transition: color 0.2s;
+    font-size: 0.9rem;
+    letter-spacing: 0.3px;
+    padding: 0.35rem 0.65rem;
+    border-radius: 6px;
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
 }
 
-.nav-links a:hover, .nav-links a.active {
-    color: var(--primary);
+.nav-links a:hover {
+    color: var(--gold-light);
+    background: rgba(212, 175, 55, 0.12);
 }
 
-/* Buttons */
+.user-pill {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    color: var(--gold-light);
+    font-size: 0.85rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+/* Luxury Buttons */
 .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 0.6rem 1.2rem;
+    padding: 0.65rem 1.4rem;
     border-radius: 8px;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.925rem;
+    letter-spacing: 0.3px;
     text-decoration: none;
     cursor: pointer;
     border: 1px solid transparent;
-    transition: all 0.2s ease;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .btn-primary {
-    background-color: var(--primary);
+    background: var(--burgundy-gradient);
     color: #ffffff;
+    border: 1px solid var(--gold-bright);
 }
 
 .btn-primary:hover {
-    background-color: var(--primary-hover);
+    background: linear-gradient(135deg, #4d0d17 0%, #731627 60%, #8c1c30 100%);
+    box-shadow: 0 4px 15px rgba(92, 17, 30, 0.35);
     transform: translateY(-1px);
+    color: var(--gold-light);
+}
+
+.btn-gold {
+    background: var(--gold-gradient);
+    color: var(--burgundy-dark);
+    font-weight: 700;
+    border: 1px solid #fff;
+    box-shadow: var(--gold-glow);
+}
+
+.btn-gold:hover {
+    background: var(--gold-gradient-hover);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+    transform: translateY(-1px);
+    color: #200407;
 }
 
 .btn-secondary {
-    background-color: #ffffff;
+    background: #ffffff;
     color: var(--dark);
-    border-color: var(--border);
+    border: 1px solid var(--border-gold);
 }
 
 .btn-secondary:hover {
-    background-color: var(--bg-light);
+    background: var(--gold-champagne);
+    color: var(--burgundy-dark);
+    border-color: var(--gold-primary);
 }
 
 .btn-outline {
-    background-color: transparent;
-    border: 1px solid var(--primary);
-    color: var(--primary);
+    background: transparent;
+    border: 1px solid var(--burgundy-rich);
+    color: var(--burgundy-rich);
 }
 
 .btn-outline:hover {
-    background-color: var(--primary);
+    background: var(--burgundy-primary);
+    color: var(--gold-light);
+    border-color: var(--gold-bright);
+}
+
+.btn-nav-login {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(212, 175, 55, 0.5);
     color: #ffffff;
 }
 
-.btn-sm {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.85rem;
+.btn-nav-login:hover {
+    background: rgba(212, 175, 55, 0.25);
+    color: var(--gold-light);
 }
 
-/* Container & Layout */
+.btn-logout {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #fce8e8;
+}
+
+.btn-logout:hover {
+    background: rgba(185, 28, 28, 0.3);
+    color: #fff;
+    border-color: #ef4444;
+}
+
+.btn-sm {
+    padding: 0.4rem 0.9rem;
+    font-size: 0.825rem;
+}
+
+/* Layout */
 .main-content {
     flex: 1;
-    max-width: 1200px;
+    max-width: 1240px;
     width: 100%;
-    margin: 2rem auto;
-    padding: 0 1.5rem;
+    margin: 2.25rem auto;
+    padding: 0 1.75rem;
 }
 
-/* Cards */
+/* Prestige Cards */
 .card {
-    background: #ffffff;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.75rem;
-    box-shadow: var(--card-shadow);
-    margin-bottom: 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-top: 3px solid var(--gold-primary);
+    border-radius: 14px;
+    padding: 2rem;
+    box-shadow: var(--shadow-card);
+    margin-bottom: 1.75rem;
+    position: relative;
+    overflow: hidden;
 }
 
 .card-title {
-    font-size: 1.25rem;
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
     font-weight: 700;
-    color: var(--dark);
-    margin-bottom: 1rem;
+    color: var(--burgundy-dark);
+    margin-bottom: 1.15rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    letter-spacing: -0.2px;
+}
+
+.card-title i {
+    color: var(--gold-primary);
 }
 
 /* Forms */
 .form-group {
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.35rem;
 }
 
 .form-label {
     display: block;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.45rem;
     font-size: 0.875rem;
     font-weight: 600;
-    color: #334155;
+    color: #3b282b;
+    letter-spacing: 0.2px;
 }
 
 .form-control, .form-select {
     width: 100%;
-    padding: 0.65rem 0.9rem;
-    border: 1px solid var(--border);
+    padding: 0.72rem 1rem;
+    border: 1px solid var(--border-subtle);
     border-radius: 8px;
     font-size: 0.95rem;
+    font-family: var(--font-body);
     color: var(--dark);
-    background-color: #fff;
+    background-color: #ffffff;
     outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    transition: all 0.25s ease;
 }
 
 .form-control:focus, .form-select:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.15);
+    border-color: var(--gold-primary);
+    box-shadow: 0 0 0 3px rgba(197, 155, 39, 0.2);
+    background-color: #fffefb;
 }
 
 /* Tables */
 .table-responsive {
     overflow-x: auto;
+    border-radius: 10px;
+    border: 1px solid var(--border-subtle);
 }
 
 .table {
@@ -207,77 +358,209 @@ body {
     border-collapse: collapse;
     text-align: left;
     font-size: 0.925rem;
+    background: #ffffff;
 }
 
 .table th {
-    background: var(--bg-light);
-    color: var(--muted);
+    background: var(--burgundy-primary);
+    color: var(--gold-light);
+    font-family: var(--font-display);
     font-weight: 600;
-    padding: 0.85rem 1rem;
-    border-bottom: 2px solid var(--border);
+    padding: 0.95rem 1.1rem;
     text-transform: uppercase;
     font-size: 0.75rem;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    border-bottom: 2px solid var(--gold-bright);
 }
 
 .table td {
-    padding: 1rem;
-    border-bottom: 1px solid var(--border);
+    padding: 1.05rem 1.1rem;
+    border-bottom: 1px solid var(--border-subtle);
     vertical-align: middle;
 }
 
-.table tr:hover {
-    background-color: #f1f5f9;
+.table tbody tr:hover {
+    background-color: var(--burgundy-soft);
 }
 
-/* Status Badges */
+/* Luxury Status Badges */
 .badge {
-    display: inline-block;
-    padding: 0.3rem 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.85rem;
     border-radius: 9999px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-transform: capitalize;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
 .badge-pending {
-    background: #fef3c7;
-    color: #92400e;
+    background: #fff8e6;
+    color: #92690a;
+    border: 1px solid #ebd08c;
 }
 
 .badge-verification {
-    background: #e0e7ff;
-    color: #3730a3;
+    background: #fbf0f8;
+    color: #7b2c5e;
+    border: 1px solid #e2b9d2;
 }
 
 .badge-processing {
-    background: #dbeafe;
-    color: #1e40af;
+    background: #fcf1f3;
+    color: var(--burgundy-rich);
+    border: 1px solid #e8b6bf;
 }
 
 .badge-ready {
-    background: #dcfce7;
+    background: #eefbf3;
     color: #166534;
+    border: 1px solid #a7e4be;
 }
 
 .badge-released {
-    background: #f1f5f9;
-    color: #334155;
-    border: 1px solid #cbd5e1;
+    background: #f3f4f6;
+    color: #374151;
+    border: 1px solid #d1d5db;
 }
 
 .badge-rejected {
-    background: #fee2e2;
+    background: #fef2f2;
     color: #991b1b;
+    border: 1px solid #fca5a5;
+}
+
+/* Hero Section */
+.hero-luxury {
+    background: var(--burgundy-gradient);
+    border: 2px solid var(--gold-border);
+    border-radius: 18px;
+    padding: 3.5rem 2rem;
+    text-align: center;
+    color: #ffffff;
+    box-shadow: 0 15px 40px rgba(59, 9, 17, 0.25);
+    margin-bottom: 2.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-luxury::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.hero-luxury::after {
+    content: '';
+    position: absolute;
+    bottom: -60px;
+    left: -60px;
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.hero-pretitle {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 0.5rem;
+}
+
+.hero-title {
+    font-family: var(--font-serif);
+    font-size: 2.85rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.hero-title span {
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+    font-size: 1.05rem;
+    color: #f7e6d8;
+    max-width: 680px;
+    margin: 0 auto 2.25rem auto;
+    font-weight: 300;
+}
+
+/* Feature Grid */
+.feature-card {
+    background: #ffffff;
+    border: 1px solid var(--border-subtle);
+    border-radius: 14px;
+    padding: 2.25rem 1.75rem;
+    text-align: center;
+    box-shadow: var(--shadow-card);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--gold-primary);
+}
+
+.feature-icon-wrapper {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    margin: 0 auto 1.25rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.65rem;
+    background: var(--burgundy-soft);
+    color: var(--burgundy-primary);
+    border: 2px solid var(--gold-border);
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover .feature-icon-wrapper {
+    background: var(--gold-gradient);
+    color: var(--burgundy-dark);
+    box-shadow: var(--gold-glow);
+}
+
+.feature-title {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--burgundy-dark);
+    margin-bottom: 0.6rem;
 }
 
 /* Footer */
 .footer {
-    background: #ffffff;
-    border-top: 1px solid var(--border);
-    padding: 1.5rem 2rem;
+    background: var(--burgundy-dark);
+    border-top: 2px solid var(--gold-primary);
+    padding: 2rem 2.5rem;
     text-align: center;
-    color: var(--muted);
-    font-size: 0.875rem;
+    color: #e5cfbe;
+    font-size: 0.88rem;
     margin-top: auto;
+}
+
+.footer strong {
+    color: var(--gold-light);
+    font-family: var(--font-display);
+    letter-spacing: 1px;
 }

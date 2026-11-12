@@ -1,13 +1,13 @@
 <?php
-// student/dashboard.php - Student Portal
-$pageTitle = "Student Dashboard";
+// student/dashboard.php — Student Portal
+$pageTitle = "Student Portal";
 require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/../includes/auth.php';
 
 requireStudent();
 $user = currentUser();
 
-// Fetch summary metrics for this student
+// Summary metrics
 $statsStmt = $pdo->prepare("
     SELECT 
         COUNT(*) AS total_count,
@@ -20,7 +20,7 @@ $statsStmt = $pdo->prepare("
 $statsStmt->execute([$user['id']]);
 $stats = $statsStmt->fetch();
 
-// Fetch list of requests
+// Fetch requests
 $reqStmt = $pdo->prepare("
     SELECT r.*, d.name AS document_name, d.processing_days
     FROM document_requests r
@@ -34,56 +34,65 @@ $requests = $reqStmt->fetchAll();
 require_once __DIR__ . '/../includes/header.php';
 ?>
 
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
     <div>
-        <h1 style="font-size: 1.75rem; color: var(--dark); font-weight: 700;">Student Portal</h1>
-        <p style="color: var(--muted); font-size: 0.9rem;">Welcome back, <strong><?= htmlspecialchars($user['name']) ?></strong> (<?= htmlspecialchars($user['student_id']) ?>)</p>
+        <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--gold-dark); font-weight: 700;">Student Services</span>
+        <h1 style="font-family: var(--font-serif); font-size: 2rem; color: var(--burgundy-dark); font-weight: 700; margin-top: 0.15rem;">
+            Academic Records Portal
+        </h1>
+        <p style="color: var(--muted); font-size: 0.925rem;">
+            Signed in as: <strong><?= htmlspecialchars($user['name']) ?></strong> (<?= htmlspecialchars($user['student_id'] ?? 'Student') ?>)
+        </p>
     </div>
     <div>
-        <a href="/DocuTrack/student/new_request.php" class="btn btn-primary">
-            <i class="fa-solid fa-plus-circle"></i> Request Document
+        <a href="/DocuTrack/student/new_request.php" class="btn btn-gold" style="padding: 0.75rem 1.6rem;">
+            <i class="fa-solid fa-file-circle-plus"></i> Request New Document
         </a>
     </div>
 </div>
 
-<!-- Quick Stat Cards -->
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
-    <div class="card" style="padding: 1.25rem;">
-        <span style="font-size: 0.8rem; color: var(--muted); font-weight: 600; text-transform: uppercase;">Total Requests</span>
-        <h2 style="font-size: 2rem; color: var(--dark); margin-top: 0.25rem;"><?= (int)($stats['total_count'] ?? 0) ?></h2>
+<!-- Stat Cards with Gold & Burgundy Accents -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1.25rem; margin-bottom: 2.25rem;">
+    <div class="card" style="padding: 1.5rem; border-top: 3.5px solid var(--burgundy-primary);">
+        <span style="font-size: 0.75rem; color: var(--gold-dark); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Total Requests</span>
+        <h2 style="font-family: var(--font-display); font-size: 2.25rem; color: var(--burgundy-dark); margin-top: 0.35rem;"><?= (int)($stats['total_count'] ?? 0) ?></h2>
     </div>
 
-    <div class="card" style="padding: 1.25rem; border-left: 4px solid var(--info);">
-        <span style="font-size: 0.8rem; color: var(--muted); font-weight: 600; text-transform: uppercase;">In Progress</span>
-        <h2 style="font-size: 2rem; color: var(--info); margin-top: 0.25rem;"><?= (int)($stats['active_count'] ?? 0) ?></h2>
+    <div class="card" style="padding: 1.5rem; border-top: 3.5px solid var(--gold-bright);">
+        <span style="font-size: 0.75rem; color: var(--gold-dark); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">In Progress</span>
+        <h2 style="font-family: var(--font-display); font-size: 2.25rem; color: var(--gold-dark); margin-top: 0.35rem;"><?= (int)($stats['active_count'] ?? 0) ?></h2>
     </div>
 
-    <div class="card" style="padding: 1.25rem; border-left: 4px solid var(--success);">
-        <span style="font-size: 0.8rem; color: var(--muted); font-weight: 600; text-transform: uppercase;">Ready for Pickup</span>
-        <h2 style="font-size: 2rem; color: var(--success); margin-top: 0.25rem;"><?= (int)($stats['ready_count'] ?? 0) ?></h2>
+    <div class="card" style="padding: 1.5rem; border-top: 3.5px solid var(--status-ready);">
+        <span style="font-size: 0.75rem; color: #15803d; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Ready for Pickup</span>
+        <h2 style="font-family: var(--font-display); font-size: 2.25rem; color: #15803d; margin-top: 0.35rem;"><?= (int)($stats['ready_count'] ?? 0) ?></h2>
     </div>
 
-    <div class="card" style="padding: 1.25rem; border-left: 4px solid var(--muted);">
-        <span style="font-size: 0.8rem; color: var(--muted); font-weight: 600; text-transform: uppercase;">Released / Completed</span>
-        <h2 style="font-size: 2rem; color: var(--dark); margin-top: 0.25rem;"><?= (int)($stats['released_count'] ?? 0) ?></h2>
+    <div class="card" style="padding: 1.5rem; border-top: 3.5px solid #6b7280;">
+        <span style="font-size: 0.75rem; color: #4b5563; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Released / Claimed</span>
+        <h2 style="font-family: var(--font-display); font-size: 2.25rem; color: #374151; margin-top: 0.35rem;"><?= (int)($stats['released_count'] ?? 0) ?></h2>
     </div>
 </div>
 
 <!-- Requests Table Card -->
 <div class="card">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.75rem;">
-        <h3 class="card-title" style="margin-bottom: 0;"><i class="fa-solid fa-list-check"></i> My Document Requests</h3>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+        <h3 class="card-title" style="margin-bottom: 0;">
+            <i class="fa-solid fa-scroll"></i> My Document Applications
+        </h3>
         <div>
-            <input type="text" id="tableSearch" class="form-control" placeholder="Search my requests..." style="width: 220px; font-size: 0.85rem;">
+            <input type="text" id="tableSearch" class="form-control" placeholder="Search my records..." style="width: 230px; font-size: 0.88rem;">
         </div>
     </div>
 
     <?php if (empty($requests)): ?>
-        <div style="text-align: center; padding: 3rem 1rem; color: var(--muted);">
-            <i class="fa-regular fa-folder-open" style="font-size: 3rem; margin-bottom: 1rem; color: #cbd5e1;"></i>
-            <h4>No requests found</h4>
-            <p style="font-size: 0.9rem; margin-bottom: 1.25rem;">You have not requested any registrar documents yet.</p>
-            <a href="/DocuTrack/student/new_request.php" class="btn btn-primary btn-sm">Request Your First Document</a>
+        <div style="text-align: center; padding: 3.5rem 1rem; color: var(--muted); background: var(--bg-silk); border-radius: 12px; border: 1px dashed var(--border-gold);">
+            <div style="width: 60px; height: 60px; border-radius: 50%; background: #ffffff; color: var(--gold-primary); display: inline-flex; align-items: center; justify-content: center; font-size: 1.75rem; margin-bottom: 1rem; border: 1px solid var(--border-gold);">
+                <i class="fa-solid fa-scroll"></i>
+            </div>
+            <h4 style="font-family: var(--font-serif); font-size: 1.25rem; color: var(--burgundy-dark); margin-bottom: 0.35rem;">No Applications Filed</h4>
+            <p style="font-size: 0.9rem; margin-bottom: 1.5rem;">You do not have any active or past document requests.</p>
+            <a href="/DocuTrack/student/new_request.php" class="btn btn-gold btn-sm">Request Your First Document</a>
         </div>
     <?php else: ?>
         <div class="table-responsive">
@@ -94,7 +103,7 @@ require_once __DIR__ . '/../includes/header.php';
                         <th>Document Requested</th>
                         <th>Purpose</th>
                         <th>Amount</th>
-                        <th>Date Submitted</th>
+                        <th>Filing Date</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -111,21 +120,21 @@ require_once __DIR__ . '/../includes/header.php';
                         ?>
                         <tr>
                             <td>
-                                <strong style="color: var(--primary); font-family: monospace; font-size: 1rem;"><?= htmlspecialchars($r['tracking_code']) ?></strong>
+                                <strong style="color: var(--burgundy-primary); font-family: monospace; font-size: 1rem; letter-spacing: 0.5px;"><?= htmlspecialchars($r['tracking_code']) ?></strong>
                             </td>
                             <td>
-                                <strong><?= htmlspecialchars($r['document_name']) ?></strong>
+                                <strong style="color: var(--dark); font-family: var(--font-serif);"><?= htmlspecialchars($r['document_name']) ?></strong>
                                 <div style="font-size: 0.78rem; color: var(--muted);"><?= $r['copies'] ?> copy(ies)</div>
                             </td>
                             <td><?= htmlspecialchars($r['purpose']) ?></td>
-                            <td>₱<?= number_format($r['total_amount'], 2) ?></td>
+                            <td><strong>₱<?= number_format($r['total_amount'], 2) ?></strong></td>
                             <td><?= date('M d, Y', strtotime($r['created_at'])) ?></td>
                             <td>
                                 <span class="badge <?= $statusBadge ?>"><?= htmlspecialchars($r['status']) ?></span>
                             </td>
                             <td>
-                                <a href="/DocuTrack/track.php?code=<?= urlencode($r['tracking_code']) ?>" class="btn btn-sm btn-secondary" title="View live timeline tracking">
-                                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Track
+                                <a href="/DocuTrack/track.php?code=<?= urlencode($r['tracking_code']) ?>" class="btn btn-sm btn-secondary" title="View live timeline">
+                                    <i class="fa-solid fa-compass"></i> Track
                                 </a>
                             </td>
                         </tr>

@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocuTrack — Luxury Burgundy & Gold Preview</title>
+    <!-- Google Fonts for Luxury Theme -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Interactive Preview Switcher Bar */
+        .preview-bar {
+            background: #200408;
+            border-bottom: 2px solid var(--gold-bright);
+            padding: 0.65rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+        .preview-badge {
+            color: var(--gold-light);
+            font-family: var(--font-display);
+            font-size: 0.82rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .preview-tabs {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .tab-btn {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(212,175,55,0.4);
+            color: #f7e6d8;
+            padding: 0.4rem 0.95rem;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .tab-btn:hover, .tab-btn.active {
+            background: var(--gold-gradient);
+            color: var(--burgundy-dark);
+            border-color: #ffffff;
+            box-shadow: var(--gold-glow);
+        }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Preview Switcher Bar -->
+<div class="preview-bar">
+    <div class="preview-badge">
+        <i class="fa-solid fa-crown" style="color: var(--gold-bright);"></i>
+        DocuTrack &bull; Regal Theme Preview
+    </div>
+    <div class="preview-tabs">
+        <button class="tab-btn active" onclick="switchTab('tab-landing', this)">
+            <i class="fa-solid fa-house"></i> Landing Page
+        </button>
+        <button class="tab-btn" onclick="switchTab('tab-tracking', this)">
+            <i class="fa-solid fa-compass"></i> Tracking Stepper
+        </button>
+        <button class="tab-btn" onclick="switchTab('tab-student', this)">
+            <i class="fa-solid fa-scroll"></i> Student Portal
+        </button>
+        <button class="tab-btn" onclick="switchTab('tab-admin', this)">
+            <i class="fa-solid fa-chart-line"></i> Registrar Dashboard
+        </button>
+    </div>
+</div>
+
+<!-- ========================================== -->
+<!-- 1. LANDING PAGE PREVIEW                    -->
+<!-- ========================================== -->
+<div id="tab-landing" class="tab-content active">
+    <!-- Navbar -->
+    <header class="navbar" style="position: static;">
+        <a href="#" class="navbar-brand">
+            <div class="brand-crest">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div class="brand-text-group">
+                <span class="brand-title">DocuTrack</span>
+                <span class="brand-sub">Registrar Services</span>
+            </div>
+            <span class="brand-badge"><i class="fa-solid fa-award"></i> Official Portal</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
+            <li><a href="#" onclick="switchTab('tab-tracking', document.querySelectorAll('.tab-btn')[1])"><i class="fa-solid fa-compass"></i> Track Status</a></li>
+            <li><a href="#" onclick="switchTab('tab-student', document.querySelectorAll('.tab-btn')[2])" class="btn btn-sm btn-nav-login"><i class="fa-solid fa-key"></i> Log In</a></li>
+            <li><a href="#" onclick="switchTab('tab-student', document.querySelectorAll('.tab-btn')[2])" class="btn btn-sm btn-gold"><i class="fa-solid fa-user-plus"></i> Student Portal</a></li>
+        </ul>
+    </header>
+
+    <div class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-luxury">
+            <div class="hero-pretitle">Office of the University Registrar</div>
+            <h1 class="hero-title">
+                The Premier Portal for <span>Document Services</span>
+            </h1>
+            <p class="hero-subtitle">
+                Experience streamlined, transparent, and dignified academic record acquisition. Request official transcripts, certificates, and clearances with real-time milestone tracking.
+            </p>
+
+            <div style="max-width: 620px; margin: 0 auto; background: rgba(255, 255, 255, 0.96); padding: 1.5rem 1.75rem; border-radius: 14px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3); border: 2px solid var(--gold-bright); text-align: left;">
+                <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem;">
+                    <i class="fa-solid fa-compass" style="color: var(--gold-dark); font-size: 1.1rem;"></i>
+                    <span style="font-family: var(--font-display); font-weight: 700; color: var(--burgundy-dark); font-size: 1rem; letter-spacing: 0.5px;">
+                        Direct Status Inquiry
+                    </span>
+                </div>
+                <p style="font-size: 0.825rem; color: var(--muted); margin-bottom: 1rem;">
+                    Track your application lifecycle instantly using your official tracking reference.
+                </p>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <input type="text" class="form-control" value="DOC-2026-REG-8421" style="flex: 1; min-width: 220px; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; border-color: var(--border-gold);" readonly>
+                    <button class="btn btn-gold" onclick="switchTab('tab-tracking', document.querySelectorAll('.tab-btn')[1])" style="white-space: nowrap; padding: 0.72rem 1.6rem;">
+                        <i class="fa-solid fa-magnifying-glass"></i> Track Request
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature Pillars -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.75rem; margin-bottom: 2.5rem;">
+            <div class="feature-card">
+                <div class="feature-icon-wrapper">
+                    <i class="fa-solid fa-feather-pointed"></i>
+                </div>
+                <h3 class="feature-title">1. Request Credentials</h3>
+                <p style="color: var(--muted); font-size: 0.925rem;">
+                    Submit authenticated applications for Transcripts of Records (TOR), Honorable Dismissals, Good Moral, and Diplomas in minutes.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon-wrapper">
+                    <i class="fa-solid fa-hourglass-half"></i>
+                </div>
+                <h3 class="feature-title">2. Milestone Monitoring</h3>
+                <p style="color: var(--muted); font-size: 0.925rem;">
+                    Follow each phase with complete visibility: from receipt audit and registrar verification to signatory approval.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon-wrapper">
+                    <i class="fa-solid fa-stamp"></i>
+                </div>
+                <h3 class="feature-title">3. Scheduled Claiming</h3>
+                <p style="color: var(--muted); font-size: 0.925rem;">
+                    Receive an accurate target release schedule and official confirmation before visiting the Registrar counter.
+                </p>
+            </div>
+        </div>
+
+        <div class="card" style="background: linear-gradient(135deg, #fffcf7 0%, #fdf8ee 100%); border: 1px solid var(--border-gold); text-align: center; padding: 2.5rem 1.5rem;">
+            <h3 style="font-family: var(--font-serif); font-size: 1.6rem; color: var(--burgundy-dark); margin-bottom: 0.5rem;">
+                Are you a current student or alumnus?
+            </h3>
+            <p style="color: var(--muted); max-width: 600px; margin: 0 auto 1.5rem auto; font-size: 0.95rem;">
+                Create your personalized account to submit requests, attach clearance receipts, and manage all past and active document transactions.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                <button onclick="switchTab('tab-student', document.querySelectorAll('.tab-btn')[2])" class="btn btn-gold" style="padding: 0.75rem 1.75rem;">
+                    <i class="fa-solid fa-user-plus"></i> Open Student Account
+                </button>
+                <button onclick="switchTab('tab-student', document.querySelectorAll('.tab-btn')[2])" class="btn btn-primary" style="padding: 0.75rem 1.75rem;">
+                    <i class="fa-solid fa-key"></i> Sign In to Portal
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ========================================== -->
+<!-- 2. TRACKING STEPPER PREVIEW                -->
+<!-- ========================================== -->
+<div id="tab-tracking" class="tab-content">
+    <header class="navbar" style="position: static;">
+        <a href="#" class="navbar-brand">
+            <div class="brand-crest"><i class="fa-solid fa-graduation-cap"></i></div>
+            <div class="brand-text-group">
+                <span class="brand-title">DocuTrack</span>
+                <span class="brand-sub">Registrar Services</span>
+            </div>
+            <span class="brand-badge"><i class="fa-solid fa-award"></i> Tracking Portal</span>
+        </a>
+    </header>
+
+    <div class="main-content" style="max-width: 860px;">
+        <div class="card" style="border-top: 4px solid var(--gold-bright);">
+            <h2 class="card-title">
+                <i class="fa-solid fa-compass"></i> Official Request Tracking
+            </h2>
+            <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+                Inspecting verified record milestones for reference code:
+            </p>
+
+            <!-- Tracking Header Details -->
+            <div style="border-top: 2px solid var(--border-gold); padding-top: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;">
+                    <div>
+                        <span style="font-size: 0.75rem; color: var(--gold-dark); text-transform: uppercase; font-weight: 700; letter-spacing: 1.5px;">Tracking Identifier</span>
+                        <h2 style="font-family: var(--font-display); color: var(--burgundy-dark); font-size: 2.1rem; letter-spacing: 1.5px;">DOC-2026-REG-8421</h2>
+                    </div>
+                    <div>
+                        <span class="badge badge-processing" style="font-size: 0.88rem; padding: 0.5rem 1.25rem; border-width: 1.5px;">
+                            <i class="fa-solid fa-circle-notch fa-spin"></i> Processing
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Visual Stepper Progress Bar -->
+                <div style="margin: 2.5rem 0; padding: 0 1rem; position: relative;">
+                    <!-- Background Line -->
+                    <div style="position: absolute; top: 22px; left: 8%; right: 8%; height: 5px; background: #ebdcd2; z-index: 1; border-radius: 99px;"></div>
+                    <!-- Completed Line (at Processing stage = 50%) -->
+                    <div style="position: absolute; top: 22px; left: 8%; width: 42%; height: 5px; background: var(--gold-gradient); z-index: 1; border-radius: 99px; box-shadow: var(--gold-glow);"></div>
+
+                    <div style="display: flex; justify-content: space-between; position: relative; z-index: 2;">
+                        <!-- Node 1: Pending (Done) -->
+                        <div style="text-align: center; width: 18%;">
+                            <div style="width: 44px; height: 44px; border-radius: 50%; margin: 0 auto 0.6rem auto; display: flex; align-items: center; justify-content: center; font-weight: bold; background: var(--burgundy-primary); color: var(--gold-light); border: 2.5px solid var(--gold-bright); box-shadow: 0 0 12px rgba(212, 175, 55, 0.4);">
+                                <i class="fa-solid fa-check" style="font-size: 0.95rem; color: var(--gold-bright);"></i>
+                            </div>
+                            <span style="font-size: 0.78rem; font-weight: 700; color: var(--burgundy-dark); display: block;">Pending</span>
+                        </div>
+
+                        <!-- Node 2: Verification (Done) -->
+                        <div style="text-align: center; width: 18%;">
+                            <div style="width: 44px; height: 44px; border-radius: 50%; margin: 0 auto 0.6rem auto; display: flex; align-items: center; justify-content: center; font-weight: bold; background: var(--burgundy-primary); color: var(--gold-light); border: 2.5px solid var(--gold-bright); box-shadow: 0 0 12px rgba(212, 175, 55, 0.4);">
+                                <i class="fa-solid fa-check" style="font-size: 0.95rem; color: var(--gold-bright);"></i>
+                            </div>
+                            <span style="font-size: 0.78rem; font-weight: 700; color: var(--burgundy-dark); display: block;">Payment Verification</span>
+                        </div>
+
+                        <!-- Node 3: Processing (Active) -->
+                        <div style="text-align: center; width: 18%;">
+                            <div style="width: 44px; height: 44px; border-radius: 50%; margin: 0 auto 0.6rem auto; display: flex; align-items: center; justify-content: center; font-weight: bold; background: var(--burgundy-primary); color: var(--gold-light); border: 2.5px solid var(--gold-bright); box-shadow: 0 0 16px rgba(212, 175, 55, 0.7);">
+                                <i class="fa-solid fa-gear fa-spin" style="font-size: 0.95rem; color: var(--gold-bright);"></i>
+                            </div>
+                            <span style="font-size: 0.78rem; font-weight: 800; color: var(--burgundy-primary); display: block;">Processing</span>
+                        </div>
+
+                        <!-- Node 4: Ready for Pickup -->
+                        <div style="text-align: center; width: 18%;">
+                            <div style="width: 44px; height: 44px; border-radius: 50%; margin: 0 auto 0.6rem auto; display: flex; align-items: center; justify-content: center; font-weight: bold; background: #ffffff; color: var(--muted); border: 2.5px solid #ebdcd2;">
+                                4
+                            </div>
+                            <span style="font-size: 0.78rem; font-weight: 500; color: var(--muted); display: block;">Ready for Pickup</span>
+                        </div>
+
+                        <!-- Node 5: Released -->
+                        <div style="text-align: center; width: 18%;">
+                            <div style="width: 44px; height: 44px; border-radius: 50%; margin: 0 auto 0.6rem auto; display: flex; align-items: center; justify-content: center; font-weight: bold; background: #ffffff; color: var(--muted); border: 2.5px solid #ebdcd2;">
+                                5
+                            </div>
+                            <span style="font-size: 0.78rem; font-weight: 500; color: var(--muted); display: block;">Released</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Silk Details Card -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; background: var(--bg-silk); padding: 1.5rem; border-radius: 12px; border: 1.5px solid var(--border-gold); margin-bottom: 2rem;">
+                    <div>
+                        <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--gold-dark); font-weight: 700;">Document Title</div>
+                        <div style="font-family: var(--font-serif); font-weight: 700; color: var(--burgundy-dark); font-size: 1.05rem;">Official Transcript of Records (TOR)</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--gold-dark); font-weight: 700;">Student Applicant</div>
+                        <div style="font-weight: 600; color: var(--dark);">2023-10045 &mdash; Juan Dela Cruz</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--gold-dark); font-weight: 700;">Purpose Declared</div>
+                        <div style="font-weight: 500; color: var(--dark);">PRC Board Examination / Employment Clearance</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--gold-dark); font-weight: 700;">Quantity & Assessment</div>
+                        <div style="font-weight: 700; color: var(--burgundy-primary);">2 copy(ies) &bull; ₱300.00</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--gold-dark); font-weight: 700;">Filing Timestamp</div>
+                        <div style="font-weight: 500; color: var(--dark);">Nov 10, 2026 09:30 AM</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--gold-dark); font-weight: 700;">Scheduled Release Date</div>
+                        <div style="font-weight: 700; color: var(--gold-dark); font-size: 1.05rem;">
+                            Nov 15, 2026 (In 3 Days)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Audit -->
+                <h4 style="font-family: var(--font-serif); font-size: 1.15rem; color: var(--burgundy-dark); margin-bottom: 1.25rem;">
+                    <i class="fa-solid fa-list-timeline" style="color: var(--gold-primary);"></i> Audit Trail & Processing History
+                </h4>
+                <div style="border-left: 2px solid var(--border-gold); margin-left: 0.75rem; padding-left: 1.5rem;">
+                    <div style="margin-bottom: 1.35rem; position: relative;">
+                        <div style="width: 12px; height: 12px; border-radius: 50%; background: var(--gold-bright); border: 2px solid var(--burgundy-primary); position: absolute; left: -1.9rem; top: 4px; box-shadow: var(--gold-glow);"></div>
+                        <div style="font-weight: 700; color: var(--burgundy-dark); font-size: 0.95rem;">
+                            Processing <span style="font-size: 0.75rem; font-weight: 400; color: var(--muted); margin-left: 0.6rem;">Nov 11, 2026 02:15 PM</span>
+                        </div>
+                        <div style="font-size: 0.88rem; color: #4a383b; margin-top: 0.25rem; background: var(--bg-silk); padding: 0.5rem 0.75rem; border-radius: 6px; border: 1px solid var(--border-subtle);">
+                            Payment confirmed. Academic record retrieved from archives and undergoing dry-seal signature.
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 1.35rem; position: relative;">
+                        <div style="width: 12px; height: 12px; border-radius: 50%; background: var(--gold-bright); border: 2px solid var(--burgundy-primary); position: absolute; left: -1.9rem; top: 4px;"></div>
+                        <div style="font-weight: 700; color: var(--burgundy-dark); font-size: 0.95rem;">
+                            Payment Verification <span style="font-size: 0.75rem; font-weight: 400; color: var(--muted); margin-left: 0.6rem;">Nov 10, 2026 11:20 AM</span>
+                        </div>
+                        <div style="font-size: 0.88rem; color: #4a383b; margin-top: 0.25rem; background: var(--bg-silk); padding: 0.5rem 0.75rem; border-radius: 6px; border: 1px solid var(--border-subtle);">
+                            Proof of payment uploaded by student. Forwarded to accounting verification.
+                        </div>
+                    </div>
+
+                    <div style="position: relative;">
+                        <div style="width: 12px; height: 12px; border-radius: 50%; background: var(--gold-bright); border: 2px solid var(--burgundy-primary); position: absolute; left: -1.9rem; top: 4px;"></div>
+                        <div style="font-weight: 700; color: var(--burgundy-dark); font-size: 0.95rem;">
+                            Pending <span style="font-size: 0.75rem; font-weight: 400; color: var(--muted); margin-left: 0.6rem;">Nov 10, 2026 09:30 AM</span>
+                        </div>
+                        <div style="font-size: 0.88rem; color: #4a383b; margin-top: 0.25rem; background: var(--bg-silk); padding: 0.5rem 0.75rem; border-radius: 6px; border: 1px solid var(--border-subtle);">
+                            Application submitted online by student. Reference generated.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ========================================== -->
+<!-- 3. STUDENT PORTAL PREVIEW                  -->
+<!-- ========================================== -->
+<div id="tab-student" class="tab-content">
+    <header class="navbar" style="position: static;">
+        <a href="#" class="navbar-brand">
+            <div class="brand-crest"><i class="fa-solid fa-graduation-cap"></i></div>
+            <div class="brand-text-group">
+                <span class="brand-title">DocuTrack</span>
+                <span class="brand-sub">Student Portal</span>
+            </div>
+        </a>
+        <ul class="nav-links">
+            <li><span class="user-pill"><i class="fa-solid fa-user-circle"></i> Juan Dela Cruz (2023-10045)</span></li>
+        </ul>
+    </header>
+
+    <div class="main-content">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+            <div>
+                <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--gold-dark); font-weight: 700;">Student Services</span>
+                <h1 style="font-family: var(--font-serif); font-size: 2rem; color: var(--burgundy-dark); font-weight: 700; margin-top: 0.15rem;">
+                    Academic Records Portal
+                </h1>
+                <p style="color: var(--muted); font-size: 0.925rem;">BS Information Technology 3-A</p>
+            </div>
+            <div>
+                <button class="btn btn-gold" style="padding: 0.75rem 1.6rem;"><i class="fa-solid fa-file-circle-plus"></i> Request New Document</button>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1.25rem; margin-bottom: 2.25rem;">
+            <div class="card" style="padding: 1.5rem; border-top: 3.5px solid var(--burgundy-primary);">
+                <span style="font-size: 0.75rem; color: var(--gold-dark); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Total Requests</span>
+                <h2 style="font-family: var(--font-display); font-size: 2.25rem; color: var(--burgundy-dark); margin-top: 0.35rem;">3</h2>
+            </div>
+            <div class="card" style="padding: 1.5rem; border-top: 3.5px solid var(--gold-bright);">
+                <span style="font-size: 0.75rem; color: var(--gold-dark); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">In Progress</span>
+                <h2 style="font-family: var(--font-display); font-size: 2.25rem; color: var(--gold-dark); margin-top: 0.35rem;">1</h2>
+            </div>
+            <div class="card" style="padding: 1.5rem; border-top: 3.5px solid var(--status-ready);">
+                <span style="font-size: 0.75rem; color: #15803d; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Ready for Pickup</span>
+                <h2 style="font-family: var(--font-display); font-size: 2.25rem; color: #15803d; margin-top: 0.35rem;">1</h2>
+            </div>
+            <div class="card" style="padding: 1.5rem; border-top: 3.5px solid #6b7280;">
+                <span style="font-size: 0.75rem; color: #4b5563; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Released / Claimed</span>
+                <h2 style="font-family: var(--font-display); font-size: 2.25rem; color: #374151; margin-top: 0.35rem;">1</h2>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 class="card-title"><i class="fa-solid fa-scroll"></i> My Document Applications</h3>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Tracking Reference</th>
+                            <th>Document Requested</th>
+                            <th>Purpose</th>
+                            <th>Amount</th>
+                            <th>Filing Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong style="color: var(--burgundy-primary); font-family: monospace; font-size: 1rem;">DOC-2026-REG-8421</strong></td>
+                            <td><strong style="font-family: var(--font-serif);">Official Transcript of Records (TOR)</strong> (2x)</td>
+                            <td>PRC Board Examination</td>
+                            <td><strong>₱300.00</strong></td>
+                            <td>Nov 10, 2026</td>
+                            <td><span class="badge badge-processing">Processing</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: var(--burgundy-primary); font-family: monospace; font-size: 1rem;">DOC-2026-REG-4190</strong></td>
+                            <td><strong style="font-family: var(--font-serif);">Certificate of Good Moral Character</strong> (1x)</td>
+                            <td>Scholarship Renewal</td>
+                            <td><strong>₱50.00</strong></td>
+                            <td>Nov 05, 2026</td>
+                            <td><span class="badge badge-ready">Ready for Pickup</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: var(--burgundy-primary); font-family: monospace; font-size: 1rem;">DOC-2026-REG-1022</strong></td>
+                            <td><strong style="font-family: var(--font-serif);">Certificate of Grades (COG)</strong> (1x)</td>
+                            <td>Internship Endorsement</td>
+                            <td><strong>₱50.00</strong></td>
+                            <td>Oct 20, 2026</td>
+                            <td><span class="badge badge-released">Released</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ========================================== -->
+<!-- 4. REGISTRAR ADMIN PREVIEW                 -->
+<!-- ========================================== -->
+<div id="tab-admin" class="tab-content">
+    <header class="navbar" style="position: static;">
+        <a href="#" class="navbar-brand">
+            <div class="brand-crest"><i class="fa-solid fa-graduation-cap"></i></div>
+            <div class="brand-text-group">
+                <span class="brand-title">DocuTrack</span>
+                <span class="brand-sub">Registrar Office Back-Office</span>
+            </div>
+            <span class="brand-badge"><i class="fa-solid fa-shield"></i> Admin Portal</span>
+        </a>
+    </header>
+
+    <div class="main-content">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+            <div>
+                <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--gold-dark); font-weight: 700;">Office of the Registrar</span>
+                <h1 style="font-family: var(--font-serif); font-size: 2.1rem; color: var(--burgundy-dark); font-weight: 700; margin-top: 0.15rem;">
+                    Administrative Overview
+                </h1>
+                <p style="color: var(--muted); font-size: 0.925rem;">Real-time queue monitoring, verification backlog, and credential release management.</p>
+            </div>
+            <div style="display: flex; gap: 0.65rem;">
+                <button class="btn btn-gold btn-sm"><i class="fa-solid fa-list-check"></i> Manage All Requests</button>
+                <button class="btn btn-secondary btn-sm"><i class="fa-solid fa-layer-group"></i> Document Offerings</button>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.25rem; margin-bottom: 2.25rem;">
+            <div class="card" style="padding: 1.4rem; border-top: 3.5px solid var(--burgundy-dark);">
+                <div style="font-size: 0.72rem; color: var(--gold-dark); font-weight: 700; text-transform: uppercase;">Total Requests</div>
+                <div style="font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; color: var(--burgundy-dark);">42</div>
+            </div>
+            <div class="card" style="padding: 1.4rem; border-top: 3.5px solid var(--gold-bright);">
+                <div style="font-size: 0.72rem; color: #92690a; font-weight: 700; text-transform: uppercase;">Pending</div>
+                <div style="font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; color: #92690a;">6</div>
+            </div>
+            <div class="card" style="padding: 1.4rem; border-top: 3.5px solid #7b2c5e;">
+                <div style="font-size: 0.72rem; color: #7b2c5e; font-weight: 700; text-transform: uppercase;">Verification</div>
+                <div style="font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; color: #7b2c5e;">8</div>
+            </div>
+            <div class="card" style="padding: 1.4rem; border-top: 3.5px solid var(--burgundy-primary);">
+                <div style="font-size: 0.72rem; color: var(--burgundy-rich); font-weight: 700; text-transform: uppercase;">Processing</div>
+                <div style="font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; color: var(--burgundy-rich);">14</div>
+            </div>
+            <div class="card" style="padding: 1.4rem; border-top: 3.5px solid #166534;">
+                <div style="font-size: 0.72rem; color: #166534; font-weight: 700; text-transform: uppercase;">Ready for Pickup</div>
+                <div style="font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; color: #166534;">9</div>
+            </div>
+            <div class="card" style="padding: 1.4rem; border-top: 3.5px solid #4b5563;">
+                <div style="font-size: 0.72rem; color: #4b5563; font-weight: 700; text-transform: uppercase;">Released</div>
+                <div style="font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; color: #4b5563;">5</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 class="card-title"><i class="fa-solid fa-clock-rotate-left"></i> Recent Submissions Queue</h3>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Tracking Reference</th>
+                            <th>Student Applicant</th>
+                            <th>Document Requested</th>
+                            <th>Fee</th>
+                            <th>Milestone Status</th>
+                            <th>Filing Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong style="color: var(--burgundy-primary); font-family: monospace;">DOC-2026-REG-8421</strong></td>
+                            <td><strong>Juan Dela Cruz</strong> (2023-10045)</td>
+                            <td>Official Transcript of Records (TOR) (2x)</td>
+                            <td>₱300.00</td>
+                            <td><span class="badge badge-processing">Processing</span></td>
+                            <td>Nov 10, 2026</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: var(--burgundy-primary); font-family: monospace;">DOC-2026-REG-9018</strong></td>
+                            <td><strong>Maria Santos</strong> (2022-00412)</td>
+                            <td>Honorable Dismissal / Transfer (1x)</td>
+                            <td>₱200.00</td>
+                            <td><span class="badge badge-verification">Payment Verification</span></td>
+                            <td>Nov 11, 2026</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: var(--burgundy-primary); font-family: monospace;">DOC-2026-REG-7153</strong></td>
+                            <td><strong>Angelo Reyes</strong> (2021-09823)</td>
+                            <td>Certificate of Good Moral Character (1x)</td>
+                            <td>₱50.00</td>
+                            <td><span class="badge badge-pending">Pending</span></td>
+                            <td>Nov 12, 2026</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div>
+        &copy; 2026 <strong>DocuTrack</strong> &mdash; Office of the Registrar Management Portal.
+    </div>
+    <div style="font-size: 0.82rem; margin-top: 0.35rem; color: var(--gold-champagne);">
+        Luxury Burgundy & Imperial Gold Edition. Fast, Dignified, and Paperless Registrar Operations.
+    </div>
+</footer>
+
+<script>
+    function switchTab(tabId, btn) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        btn.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+</body>
+</html>
